@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # Check for and install dependencies
 
 dependencies=( "nmap" "enscript" )
@@ -32,23 +30,17 @@ echo -e "\e[1;34mEnter target IP or path of target file:\e[0m"
 
 read target
 
-
-
 # Ask if user wants to run all commands at once
 
 echo -e "\e[1;34mRun all commands at once? (yes/no)\e[0m"
 
 read run_all
 
-
-
 # Ask if user wants separate report for each command output
 
 echo -e "\e[1;34mDo you want separate report for each command output? (yes/no)\e[0m"
 
 read separate_reports
-
-
 
 # Loop through all nmap commands
 
