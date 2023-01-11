@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Define text color for banner
 color=("\033[1;31m" "\033[1;32m" "\033[1;33m" "\033[1;34m" "\033[1;35m" "\033[1;36m" "\033[1;37m")
 random_color=${color[$RANDOM % ${#color[@]}]}
@@ -164,3 +163,4 @@ echo -e "\e[1;34mCreating PDF report...\e[0m"
 
 enscript --output="nmap-report.pdf" --color -E"$separate_reports"
 
+echo "Script executed successfully with blessing of Dark_Shadow04."
