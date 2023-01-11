@@ -72,3 +72,13 @@
 <h2>Disclaimer</h2>
 <p>It's your responsibility to use this script legally and ethically. I will not be held responsible for any illegal or malicious use of this script.</p>
 
+<h2>Error Remediation</h2>
+<p>If you get an error message saying that the command 'ps2pdf' is not found, it likely means that Ghostscript is not installed on your computer or is not in your system's PATH. You can check if Ghostscript is installed by running the command 'gs' in your command prompt or terminal.<p>
+
+<p>You can install Ghostscript on Windows, Mac, and Linux. On Windows you can download it from the official website, on Ubuntu/Debian you can use apt-get<p>
+<pre><code>sudo apt-get install ghostscript</pre></code>
+
+<p>On MacOS use brew</p>
+<pre><code>brew install ghostscript</pre></code>
+
+<p>Once you have Ghostscript installed, you should be able to use the 'ps2pdf' command.</p>
