@@ -1,40 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-  <h1>Nmap Automation Script</h1>
-  <p>This script automates the process of running multiple nmap commands and generates a report in PDF format.</p>
-  <h2>Features:</h2>
-  <ul>
-    <li>Checks for and installs dependencies (nmap and enscript)</li>
-    <li>Prompts user for target IP or path of target file</li>
-    <li>Prompts user to run all commands at once or individually</li>
-    <li>Prompts user for separate report for each command output or a single report for all commands</li>
-    <li>Includes exotic scan flags and techniques</li>
-  </ul>
-  <h2>Usage:</h2>
-  <ol>
-    <li>
-        <p>Make sure you have permission to run the script, if not use the command <code> chmod +x nmap-script.sh </code> in the terminal to grant the execute permission to the script. </p>
-    </li>
-    <li>
-        <p>Run the script <code>./nmap-script.sh</code>  in the terminal and the script will prompt you to enter the target IP or path of target file.</p>
-    </li>
-    <li>
-        <p>The script will prompt you if you want to run all commands at once or individually. If you choose to run them individually, you will be prompted for each command before it runs.</p>
-    </li>
-    <li>
-        <p>The script will also prompt you if you want a separate report for each command output or a single report for all commands.</p>
-    </li>
-    <li>
-        <p>The script will then run all the specified commands and output the results to text files.</p>
-    </li>
-    <li>
-        <p>Finally, the script will generate a PDF report of the nmap scan outputs and save it as "nmap-report.pdf" in the current directory.</p>
-    </li>
-  </ol>
-  <h2>Note:</h2>
-  <p>The script uses enscript command, so please make sure that you have latest version of enscript installed in your system and also have enough disk space and memory to generate the pdf report. Also, please ensure that you have the necessary permissions to run the script and access the target IP or file path.</p>
-</body>
-</html>
+<h1>Nmap Automation Script</h1>
+
+<h2>Introduction</h2>
+
+<p>This script automates various Nmap commands and generates a report of the scan results.</p>
+
+<h2>Dependencies</h2>
+<p>This script requires the following dependencies to be installed on the system:</p>
+<ul>
+  <li>nmap</li>
+  <li>enscript</li>
+</ul>
+<p>The script will automatically check for and install these dependencies if they are missing. However, it assumes that it is running on the correct OS environment and has access to the internet.
+
+<h2>Usage</h2>
+<h3>Step 1</h3>
+<p>To use the script, simply navigate to the directory where the script is located in the command line and type: 
+</p>
+<pre><code>sudo ./script_name.sh or ./script_name.sh</code></pre>
+<h3>Step 2</h3>
+<p>The script will prompt you for the following information:</p>
+<ul>
+  <li>Target IP or path of target file: This is the IP address or file containing a list of IP addresses that you want to scan.</li>
+  <li>Run all commands at once? (yes/no): If you select "yes", the script will run all commands without prompting you for confirmation. If you select "no", the script will prompt you for confirmation before running each command.</li>
+  <li>Do you want separate report for each command output? (yes/no): If you select "yes", the script will create a separate report for each command in the "separate_reports" folder. If you select "no", the script will create a single report containing the output of all commands in the "full_reports" folder.</li>
+</ul>
+<h3>Step 3</h3>
+<p> Once you've provided all the information and script completes the scan, it will generate a text file report of the scan results.</p>
+<h3>Step 4</h3>
+<p> You can access the report files in the "separate_reports" and "full_reports" folder </p>
+
+<h2>Notes</h2>
+
+<p>Here are some things to keep in mind when using this script:</p>
+
+<ul>
+  <li>This script is not intended to be used for illegal or malicious purposes.</li>
+  <li>The script will run all the commands in an unprivileged mode, which means it will not have the ability to scan privileged ports like port number 1-1024. If you would like to scan those ports, you will need to run the script as a superuser.</li>
+  <li>The script is designed to be used on a Linux or macOS system. It may not work as expected on other operating systems.</li>
+  <li>Make sure to check the licenses of the Nmap Scripting Engine scripts that you use with this script and comply with them.</li>
+  <li>The script is not a substitute for manual analysis of scan results. It is always a good idea to review the scan results manually to ensure that they are accurate and to look for any false positives.</li>
+</ul>
+
+<h2>Disclaimer</h2>
+<p>It's your responsibility to use this script legally and ethically. I will not be held responsible for any illegal or malicious use of this script.</p>
+
