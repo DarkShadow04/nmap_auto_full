@@ -63,7 +63,6 @@ commands=(
     "nmap --script vuln -sV -O $target"
     "nmap --script smb-vuln-ms17-010.nse -p 445 -Pn -n $target"
     "nmap --script=vuln -A $target"
-    "nmap --script=vuln, auth -A $target"
     "nmap -sF -p1-100 -T4 $target"
     "nmap -sS -v -v -Pn $target"
     "nmap -sS -v -v -Pn -g 88 $target"
