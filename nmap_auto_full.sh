@@ -22,20 +22,28 @@ echo -e "${random_color} system_info script by: Dark_Shadow04 ${reset}\n"
 echo -e "${random_color} https://github.com/DarkShadow04  ${reset}\n"
 echo -e "${random_color} Copyright 2022 Dark_Shadow04 ${reset}\n"
 
-# Check for dependencies and install if missing
-dependencies=(nmap enscript)
+
+# Check for dependencies
+dependencies=("nmap" "enscript")
+
 for dependency in "${dependencies[@]}"
 do
-    command -v $dependency >/dev/null 2>&1 || { echo >&2 "I require $dependency but it's not installed. Installing $dependency now"; 
-    if [ "$(uname)" = "Darwin" ]; then
-       brew install $dependency
-    elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-       apt-get install -y $dependency
+    if ! [ -x "$(command -v $dependency)" ]; then
+        echo -e "\e[1;31mError: $dependency is not installed.\e[0m"
+        if [ "$(uname)" == "Linux" ]; then
+            echo -e "\e[1;34mInstalling $dependency...\e[0m"
+            sudo apt-get install -y $dependency
+        elif [ "$(uname)" == "Darwin" ]; then
+            echo -e "\e[1;34mInstalling $dependency...\e[0m"
+            brew install $dependency
+        else
+            echo -e "\e[1;31mError: Unsupported operating system. Please install $dependency manually.\e[0m"
+            exit 1
+        fi
     fi
-    }
 done
 
-# Get target IP or path of target file
+# Get target
 echo -e "\e[1;34mEnter target IP or path of target file:\e[0m"
 read target
 
@@ -43,37 +51,17 @@ read target
 echo -e "\e[1;34mRun all commands at once? (yes/no)\e[0m"
 read run_all
 
-# Ask if user wants separate report for each command output
+# Ask if user wants separate reports for each command
 echo -e "\e[1;34mDo you want separate report for each command output? (yes/no)\e[0m"
 read separate_reports
 
-# Create directories for storing reports
-if [ "$separate_reports" = "yes" ]; then
-    mkdir -p separate_reports
-fi
-mkdir -p full_reports
+# Create report directories
+mkdir -p separate_reports full_reports
 
-# Loop through all nmap commands
-commands=(
-    "sudo nmap -Pn -n -sS -A -T4 $target"
-    "nmap -Pn -n -sCV -A $target"
-    "nmap -Pn -n -p- -T4 $target"
-    "nmap --script smb-os-discovery.nse --script-args=unsafe=1 -p 445 $target -Pn -n"
-    "nmap --script firewall-bypass.nse -p- -T4 $target"
-    "nmap --script vuln -sV -O $target"
-    "nmap --script smb-vuln-ms17-010.nse -p 445 -Pn -n $target"
-    "nmap --script=vuln -A $target"
-    "nmap -sF -p1-100 -T4 $target"
-    "nmap -sS -v -v -Pn $target"
-    "nmap -sS -v -v -Pn -g 88 $target"
-    "nmap -6 $target"
-    "nmap --script=ipidseq --script-args=ipid.zero=1 -v -v -Pn $target"
-    "nmap --send-ip -v -v -Pn $target"
-    "nmap --spoof-mac 00-00-5E-F0-00-01 $target"
-    "nmap -f $target"
-    "nmap --source-port 88 $target"
-    "nmap -b $target"
-)
+# Set array of commands
+commands=("nmap -Pn -n -sS -A -T4 $target" "nmap -Pn -n -sCV -A $target" "nmap -Pn -n -p- -T4 $target" "nmap --script smb-os-discovery.nse --script-args=unsafe=1 -p 445 $target -Pn -n" "nmap -sF -p1-100 -T4 $target" "nmap -sS -v -v $target" "nmap --script=vuln -sV -O --script-args=unsafe=1 $target" "nmap --script=smb-os-discovery.nse --script-args=unsafe=1 -p445 $target -Pn -n" "nmap --script=firewall-bypass --script-args=unsafe=1 $target")
+
+# Iterate through commands
 for command in "${commands[@]}"
 do
     if [ "$run_all" = "no" ]; then
@@ -87,17 +75,33 @@ do
     if [ "$run" = "yes" ]; then
         # Run command and output to file
         echo -e "\e[1;34mRunning command '$command'...\e[0m"
-        output=$(eval $command)
-        if [ "$separate_reports" = "yes" ]; then
-            echo "$output" > "separate_reports/$command.txt"
+        output=$(eval $command 2>&1)
+        if [ "$separate_reports" = "yes" ];
+then
+            # Create separate report for command
+            echo -e "\e[1;34mCreating separate report for command '$command'...\e[0m"
+            command_name=$(echo "$command" | tr ' ' '_')
+            report_file="separate_reports/$command_name.txt"
+            echo "$output" > $report_file
+            enscript -q -fCourier8 -o - $report_file | ps2pdf - $report_file.pdf
+        else
+            # Add output to full report
+            echo -e "\e[1;34mAdding output to full report...\e[0m"
+            echo "$output" >> full_reports/full_report.txt
         fi
+    else
+        echo -e "\e[1;34mSkipping command '$command'...\e[0m"
     fi
 done
 
+# Create full report
 if [ "$separate_reports" = "no" ]; then
-    echo "$output" > "full_reports/nmap-report.txt"
+    echo -e "\e[1;34mCreating full report...\e[0m"
+    enscript -q -fCourier8 -o - full_reports/full_report.txt | ps2pdf - full_reports/full_report.pdf
 fi
 
+# Complete
 echo -e "\e[1;34mScan complete. Reports saved in separate_reports/ and full_reports/ directories\e[0m"
+
 
 echo "Script executed successfully with blessing of Dark_Shadow04."
