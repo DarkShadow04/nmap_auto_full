@@ -16,7 +16,7 @@
 <h3>Step 1</h3>
 <p>To use the script, simply navigate to the directory where the script is located in the command line and type: 
 </p>
-<pre><code>sudo ./script_name.sh or ./script_name.sh</code></pre>
+<pre><code>sudo ./nmap_auto_full.sh or ./nmap_auto_full.sh</code></pre>
 <h3>Step 2</h3>
 <p>The script will prompt you for the following information:</p>
 <ul>
