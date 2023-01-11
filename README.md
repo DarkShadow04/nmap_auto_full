@@ -12,6 +12,14 @@
 </ul>
 <p>The script will automatically check for and install these dependencies if they are missing. However, it assumes that it is running on the correct OS environment and has access to the internet.
 
+<h2>Steps to run the script</h2>
+<ol>
+  <li>Clone or download the script on your local machine.</li>
+  <li>Give execution permission to the script using the command: <strong style="color: green">chmod +x nmap_auto_full.sh</strong>.</li>
+  <li>Run the script using the command: <strong style="color: green">sudo ./nmap_auto_full.sh or ./nmap_auto_full.sh</strong>.</li>
+  <li>Follow the prompts and provide the required information, such as the target IP or file path, whether to run all commands at once, and whether to generate separate reports.</li>
+</ol>
+  
 <h2>Usage</h2>
 <h3>Step 1</h3>
 <p>To use the script, simply navigate to the directory where the script is located in the command line and type: 
@@ -29,8 +37,28 @@
 <h3>Step 4</h3>
 <p> You can access the report files in the "separate_reports" and "full_reports" folder </p>
 
-<h2>Notes</h2>
+<h2>Commands</h2>
+<ul>
+  <li><strong style="color: green">nmap -Pn -n -sS -A -T4 &lt;target&gt;</strong> - Performs a stealth SYN scan with OS and version detection and aggressive timing.</li>
+  <li><strong style="color: green">nmap -Pn -n -sCV -A &lt;target&gt;</strong> - Performs a version detection scan with OS detection.</li>
+  <li><strong style="color: green">nmap -Pn -n -p- -T4 &lt;target&gt;</strong> - Performs a full port scan with aggressive timing.</li>
+  <li><strong style="color: green">nmap --script smb-os-discovery.nse --script-args=unsafe=1 -p 445 &lt;target> -Pn -n</strong> - Perform smb os discovery scan.</li>
 
+  <li><strong style="color: green">nmap -sF -p1-100 -T4 &lt;target&gt;</strong> - Perform Exotic scan flags.</li>
+  <li><strong style="color: green">nmap -sS -v -v -Pn -g 88 &lt;target&gt;</strong> - Perform source port manipulation scan.</li>
+  <li><strong style="color: green">nmap -6 &lt;target&gt;</strong> - Perform IPv6 scan.</li>
+  <li><strong style="color: green">nmap --script=ipidseq --script-args=ipid.zero=1 -v -v -Pn &lt;target&gt;</strong> - Perform IP ID idle scanning.</li>
+  <li><strong style="color: green">nmap --send-ip -v -v -Pn &lt;target&gt;</strong> - Perform multiple ping probes.</li>
+  <li><strong style="color: green">nmap --spoof-mac 00-00-5E-F0-00-01 &lt;target&gt;</strong> - Perform MAC address spoofing.</li>
+  <li><strong style="color: green">nmap -f &lt;target&gt;</strong> - Perform fragmentation scan.</li>
+  <li><strong style="color: green">nmap --source-port 88 &lt;target&gt;</strong> - Perform source routing scan.</li>
+  <li><strong style="color: green">nmap -b &lt;target&gt;</strong> - Perform FTP bounce scan.</li>
+  <li><strong style="color: green">nmap --script=vuln -sV -O --script-args=unsafe=1 &lt;target&gt;</strong> - Perform vuln - os smb and aggressive all these scripts.</li>
+  <li><strong style="color: green">nmap --script=firewall-bypass --script-args=unsafe=1 &lt;target&gt;</strong> - Perform firewall bypass scan.</li>
+</ul>
+
+<h2>Notes</h2>
+<p>This script makes use of the <a href="https://nmap.org/">Nmap</a> tool and <a href="http://www.gnu.org/software/enscript/">Enscript</a> for creating reports in text format. The script will check for the dependencies and will install them if they are not found.</p>
 <p>Here are some things to keep in mind when using this script:</p>
 
 <ul>
