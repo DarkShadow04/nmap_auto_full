@@ -58,8 +58,22 @@ read separate_reports
 # Create report directories
 mkdir -p separate_reports full_reports
 
-# Set array of commands
-commands=("nmap -Pn -n -sS -A -T4 $target" "nmap -Pn -n -sCV -A $target" "nmap -Pn -n -p- -T4 $target" "nmap --script smb-os-discovery.nse --script-args=unsafe=1 -p 445 $target -Pn -n" "nmap -sF -p1-100 -T4 $target" "nmap -sS -v -v $target" "nmap --script=vuln -sV -O --script-args=unsafe=1 $target" "nmap --script=smb-os-discovery.nse --script-args=unsafe=1 -p445 $target -Pn -n" "nmap --script=firewall-bypass --script-args=unsafe=1 $target")
+# Set an array of commands
+commands=(
+    "nmap -Pn -n -sS -A -T4 $target"
+    "nmap -Pn -n -sCV -A $target"
+    "nmap -Pn -n -p- -T4 $target"
+    "nmap --script smb-os-discovery.nse --script-args=unsafe=1 -p 445 $target -Pn -n"
+    "nmap -sF -p1-100 -T4 $target"
+    "nmap -sS -v -v -Pn -g 88 $target"
+    "nmap --script=ipidseq --script-args=ipid.zero=1 -v -v -Pn $target"
+    "nmap --send-ip -v -v -Pn $target"
+    "nmap -f $target"
+    "nmap --source-port 88 $target"
+    "nmap -b $target"
+    "nmap --script=vuln -sV -O --script-args=unsafe=1 $target"
+    "nmap --script=firewall-bypass --script-args=unsafe=1 $target"
+)
 
 # Iterate through commands
 for command in "${commands[@]}"
