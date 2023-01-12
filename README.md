@@ -43,14 +43,11 @@
   <li><strong style="color: green">nmap -Pn -n -sCV -A &lt;target&gt;</strong> - Performs a version detection scan with OS detection.</li>
   <li><strong style="color: green">nmap -Pn -n -p- -T4 &lt;target&gt;</strong> - Performs a full port scan with aggressive timing.</li>
   <li><strong style="color: green">nmap --script smb-os-discovery.nse --script-args=unsafe=1 -p 445 &lt;target> -Pn -n</strong> - Perform smb os discovery scan.</li>
-
   <li><strong style="color: green">nmap -sF -p1-100 -T4 &lt;target&gt;</strong> - Perform Exotic scan flags.</li>
   <li><strong style="color: green">nmap -sS -v -v -Pn -g 88 &lt;target&gt;</strong> - Perform source port manipulation scan.</li>
-  <li><strong style="color: green">nmap -6 &lt;target&gt;</strong> - Perform IPv6 scan.</li>
-  <li><strong style="color: green">nmap --script=ipidseq --script-args=ipid.zero=1 -v -v -Pn &lt;target&gt;</strong> - Perform IP ID idle scanning.</li>
+   <li><strong style="color: green">nmap --script=ipidseq --script-args=ipid.zero=1 -v -v -Pn &lt;target&gt;</strong> - Perform IP ID idle scanning.</li>
   <li><strong style="color: green">nmap --send-ip -v -v -Pn &lt;target&gt;</strong> - Perform multiple ping probes.</li>
-  <li><strong style="color: green">nmap --spoof-mac 00-00-5E-F0-00-01 &lt;target&gt;</strong> - Perform MAC address spoofing.</li>
-  <li><strong style="color: green">nmap -f &lt;target&gt;</strong> - Perform fragmentation scan.</li>
+   <li><strong style="color: green">nmap -f &lt;target&gt;</strong> - Perform fragmentation scan.</li>
   <li><strong style="color: green">nmap --source-port 88 &lt;target&gt;</strong> - Perform source routing scan.</li>
   <li><strong style="color: green">nmap -b &lt;target&gt;</strong> - Perform FTP bounce scan.</li>
   <li><strong style="color: green">nmap --script=vuln -sV -O --script-args=unsafe=1 &lt;target&gt;</strong> - Perform vuln - os smb and aggressive all these scripts.</li>
