@@ -18,9 +18,9 @@ echo -e "_
                                                                                                                          
 _"
 
-echo -e "${random_color} system_info script by: Dark_Shadow04 ${reset}\n"
+echo -e "${random_color} nmap_auto_full script by: Dark_Shadow04 ${reset}\n"
 echo -e "${random_color} https://github.com/DarkShadow04  ${reset}\n"
-echo -e "${random_color} Copyright 2022 Dark_Shadow04 ${reset}\n"
+echo -e "${random_color} Copyright 2023 Dark_Shadow04 ${reset}\n"
 
 
 # Check for dependencies
